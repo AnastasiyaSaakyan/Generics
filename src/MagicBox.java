@@ -1,20 +1,19 @@
 import java.util.Random;
 
 public class MagicBox<T> {
-    protected T[] items;
+    private static final Random randomizer = new Random();
+    private T[] items;
 
-    public MagicBox(int maxItems) {
+    public MagicBox(int lenghtItems) {
 
-        this.items = (T[]) new Object[maxItems];
+        this.items = (T[]) new Object[lenghtItems];
     }
-
-    int filled = 0;
 
     public boolean add(T item) {
         for (int i = 0; i < items.length; i++) {
             if (items[i] == null) {
                 items[i] = item;
-                filled += 0;
+                System.out.println("Добавили:" + item);
                 return true;
             }
         }
@@ -25,17 +24,12 @@ public class MagicBox<T> {
         Random random = new Random();
         for (int i = 0; i < items.length; i++) {
             if (items[i] == null) {
-                throw new RuntimeException("Коробка не заполнена! Осталось заполнить: " + (items.length - filled) + " ячеек.");
+                throw new RuntimeException("Коробка не заполнена! Осталось заполнить: " + (items.length - 1) + " ячеек.");
             }
         }
-        for (int i = 0; i < items.length; i++) {
-            if (items[i] != null) {
-                int randomInt = random.nextInt(items.length);
-                System.out.println("Коробка заполнена! Случайный элемент из коробки: " + items[randomInt]);
-                System.out.println();
-                return items[randomInt];
-            }
-        }
-        return null;
+        int randomInt = random.nextInt(items.length);
+        System.out.println("Коробка заполнена! Случайный элемент из коробки: " + items[randomInt]);
+        System.out.println();
+        return items[randomInt];
     }
 }
